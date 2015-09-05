@@ -22,11 +22,4 @@ def deaf_grandma
 		end
 	end
 end
-
-
-(1..99).reverse_each.map do |x| 
-	print """\n#{x} bottles of beer on the wall, #{x} bottles of beer.\n Take one down and pass it around, #{x-1} bottles of beer on the wall."""
-end
-
-
 bottles_of_beer
