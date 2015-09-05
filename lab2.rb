@@ -1,18 +1,11 @@
 def bottles_of_beer
-	i = 99
-	until i <= 0 
-		print """
-		#{i} bottles of beer on the wall, #{i} bottles of beer.\n
-	 	Take one down and pass it around, #{i - 1} bottles of beer on the wall.
-	 	"""
-	 	i -= 1
+	(2..99).reverse_each.map do |x| 
+		print """\n#{x} bottles of beer on the wall, #{x} bottles of beer.\n Take one down and pass it around, #{x-1} bottles of beer on the wall."""
 	end
-	
-	if i == 0
-		print """
-		No more bottles of beer on the wall, no more bottles of beer.
-		Go to store and buy some more, 99 bottles of beer on the wall.
-		"""
+
+	(0..1).reverse_each.map do |x|
+		print """\n#{x} bottle of beer on the wall, #{x} bottle of beer.\n Take one down and pass it around, no more bottles of beer on the wall.""" if x == 1
+		print """\nNo more bottles of beer on the wall, no more bottles of beer.\n Go to the store and buy some more, 99 bottles of beer on the wall.""" if x == 0
 	end
 end
 
@@ -30,6 +23,10 @@ def deaf_grandma
 	end
 end
 
-deaf_grandma
+
+(1..99).reverse_each.map do |x| 
+	print """\n#{x} bottles of beer on the wall, #{x} bottles of beer.\n Take one down and pass it around, #{x-1} bottles of beer on the wall."""
+end
 
 
+bottles_of_beer
