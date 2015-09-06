@@ -12,14 +12,17 @@ end
 def deaf_grandma
 	p "Hello Sonny, how has everything been?"
 	grandma = "HUH?! SPEAK UP SONNY!"
+	response_arr = []
 	loop do
 		response = gets.chomp
-		break if response == "BYE"
 		if response == response.upcase 
+			response_arr.push(response)
+			break if response_arr.each_cons(3).any? {|x,y,z| x == "BYE" && y == "BYE" && z == "BYE"} and p "Bye Sonny!"
 			p "No, no since #{rand(1930..1980)}!"
 		else
+			response_arr.push(response)
 			p grandma
-		end
+		end 
 	end
 end
-bottles_of_beer
+
