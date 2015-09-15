@@ -1,6 +1,6 @@
- def cels_to_fahr(temperature)
+def cels_to_fahr(temperature)
 	#fahrenheit = (temperature * 9/5) + 32
-	puts (temperature * 9/5) + 32 #fahrenheit
+	(temperature * 9/5) + 32 #fahrenheit
 end
 
 def fahr_to_cels
@@ -36,4 +36,4 @@ def mad_lib
 	So #{name} went back to the #{place} and got all of his money back.
 	"""#.gsub(/\s+/," ").strip
 end
-mad_lib
+puts cels_to_fahr(100)

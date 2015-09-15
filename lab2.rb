@@ -19,7 +19,7 @@ def deaf_grandma
 		if response == response.upcase 
 			response_arr.push(response)
 			#Breaks if there are three consectutive strings that each equal "BYE"
-			break if response_arr.each_cons(3).any? {|x,y,z| x == "BYE" && y == "BYE" && z == "BYE"} and puts "Bye Sonny!"
+			break if response_arr.each_cons(3).any? {|x,y,z| x == "BYE" && y == "BYE" && z == "BYE"} 
 			puts "No, no since #{rand(1930..1980)}!"
 		else
 			response_arr.push(response)
@@ -28,5 +28,5 @@ def deaf_grandma
 	end
 end
 
-bottles_of_beer
+deaf_grandma
 
