@@ -1,12 +1,12 @@
 def bottles_of_beer
 	#Takes a range of numbers and reverses each of them, then changes them so that they're included in string
 	(2..99).reverse_each.map do |x| 
-		puts """\n#{x} bottles of beer on the wall, #{x} bottles of beer.\n Take one down and pass it around, #{x-1} bottles of beer on the wall."""
+		puts "\n#{x} bottles of beer on the wall, #{x} bottles of beer.\nTake one down and pass it around, #{x-1} bottles of beer on the wall."
 	end
 	#This string is a bit different for the last two numbers, but does same thing
 	(0..1).reverse_each.map do |x|
-		puts """\n#{x} bottle of beer on the wall, #{x} bottle of beer.\nTake one down and pass it around, no more bottles of beer on the wall.""" if x == 1
-		puts """\nNo more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall.""" if x == 0
+		puts "\n#{x} bottle of beer on the wall, #{x} bottle of beer.\nTake one down and pass it around, no more bottles of beer on the wall." if x == 1
+		puts "\nNo more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall." if x == 0
 	end
 end
 
@@ -34,7 +34,7 @@ def deaf_grandma
 	i = 3
 	puts "Hello Sonny, how has everything been?"
 	deaf_response = "HUH?! SPEAK UP SONNY!"
-	while i >= 1
+	while i >= 0
 		whut_response = "No, not since since #{rand(1930..1980)}"
 		response = gets.chomp
 		case response
@@ -55,3 +55,5 @@ def deaf_grandma
 		end
 	end
 end
+
+bottles_of_beer
