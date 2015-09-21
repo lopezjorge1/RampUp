@@ -10,6 +10,7 @@ def bottles_of_beer
 	end
 end
 
+=begin
 def deaf_grandma
 	puts "Hello Sonny, how has everything been?"
 	grandma = "HUH?! SPEAK UP SONNY!"
@@ -27,6 +28,30 @@ def deaf_grandma
 		end 
 	end
 end
+=end
 
-deaf_grandma
-
+def deaf_grandma
+	i = 3
+	puts "Hello Sonny, how has everything been?"
+	deaf_response = "HUH?! SPEAK UP SONNY!"
+	while i >= 1
+		whut_response = "No, not since since #{rand(1930..1980)}"
+		response = gets.chomp
+		case response
+		when "BYE"
+			i -= 1
+			case i
+			when 0
+				puts "Bye Sonny!"
+				break
+			end
+			puts whut_response
+		when response.upcase
+			puts whut_response
+			i = 3
+		else
+			puts deaf_response
+			i = 3
+		end
+	end
+end
