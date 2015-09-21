@@ -1,10 +1,10 @@
 def bottles_of_beer
 	#Takes a range of numbers and reverses each of them, then changes them so that they're included in string
-	(2..99).reverse_each.map do |x| 
+	(2..99).reverse_each do |x| 
 		puts "\n#{x} bottles of beer on the wall, #{x} bottles of beer.\nTake one down and pass it around, #{x-1} bottles of beer on the wall."
 	end
 	#This string is a bit different for the last two numbers, but does same thing
-	(0..1).reverse_each.map do |x|
+	(0..1).reverse_each do |x|
 		puts "\n#{x} bottle of beer on the wall, #{x} bottle of beer.\nTake one down and pass it around, no more bottles of beer on the wall." if x == 1
 		puts "\nNo more bottles of beer on the wall, no more bottles of beer.\nGo to the store and buy some more, 99 bottles of beer on the wall." if x == 0
 	end
