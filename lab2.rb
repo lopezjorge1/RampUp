@@ -32,10 +32,8 @@ end
 =begin
 def deaf_grandma
 	i = 3
-	puts "Hello Sonny, how has everything been?"
-	deaf_response = "HUH?! SPEAK UP SONNY!"
+	puts "Hello Sonny, how has everything been?""
 	while i >= 0
-		whut_response = "No, not since since #{rand(1930..1980)}"
 		response = gets.chomp
 		case response
 		when "BYE"
@@ -46,10 +44,10 @@ def deaf_grandma
 			end
 			puts "Are you sure you want to go?!"
 		when response.upcase
-			puts whut_response
+			puts "No, not since since #{rand(1930..1980)}"
 			i = 3
 		else
-			puts deaf_response
+			puts "HUH?! SPEAK UP SONNY!"
 			i = 3
 		end
 	end
