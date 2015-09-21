@@ -10,7 +10,7 @@ def bottles_of_beer
 	end
 end
 
-=begin
+
 def deaf_grandma
 	puts "Hello Sonny, how has everything been?"
 	grandma = "HUH?! SPEAK UP SONNY!"
@@ -28,8 +28,8 @@ def deaf_grandma
 		end 
 	end
 end
-=end
 
+=begin
 def deaf_grandma
 	i = 3
 	puts "Hello Sonny, how has everything been?"
@@ -40,12 +40,11 @@ def deaf_grandma
 		case response
 		when "BYE"
 			i -= 1
-			case i
-			when 0
+			if i == 0
 				puts "Bye Sonny!"
 				break
 			end
-			puts whut_response
+			puts "Are you sure you want to go?!"
 		when response.upcase
 			puts whut_response
 			i = 3
@@ -55,5 +54,5 @@ def deaf_grandma
 		end
 	end
 end
-
-bottles_of_beer
+=end
+deaf_grandma
