@@ -32,7 +32,7 @@ end
 =begin
 def deaf_grandma
 	i = 3
-	puts "Hello Sonny, how has everything been?""
+	puts "Hello Sonny, how has everything been?
 	while i >= 0
 		response = gets.chomp
 		case response
