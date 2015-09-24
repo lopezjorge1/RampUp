@@ -19,7 +19,7 @@ def number_guess
 end
 =end
 
-
+#Method iterates 5 times prompting for a number guess
 def number_guess
 	secret_num = rand(101)
 	chances = 5
@@ -41,5 +41,3 @@ def number_guess
 		end
 	end
 end
-
-number_guess		

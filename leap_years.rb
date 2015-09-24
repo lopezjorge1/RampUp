@@ -3,5 +3,6 @@ def leap_years
 	start = gets.to_i
 	puts "What year do you want to end with?"
 	finish = gets.to_i
+	#Selects the leap years within the range given
 	(start..finish).select {|x| (x % 400 == 0) || (x % 4 == 0) && (x % 100 != 0)}
 end

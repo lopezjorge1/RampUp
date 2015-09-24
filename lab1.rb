@@ -36,4 +36,3 @@ def mad_lib
 	So #{name} went back to the #{place} and got all of his money back.
 	"""#.gsub(/\s+/," ").strip
 end
-puts cels_to_fahr(100)
