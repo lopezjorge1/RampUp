@@ -20,4 +20,3 @@ def caesar_cipher(direction,num,str)
 	char_with_shift = characters.zip(shift).to_h
 	str.chars.map {|x| x = char_with_shift[x]}.join
 end
-
