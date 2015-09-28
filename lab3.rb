@@ -11,14 +11,10 @@ def crypt(choice, str)
 	end
 end
 
-
-def caesar_cipher(direction,num,str)
-	if direction == "down" 
-		#this will just shift letters down, so A --> Z
-		str.chars.map {|x| x == " " ? x = " " : x = (x.ord + num).chr}.join
-	elsif direction == "up" 
-		#this will shift letters up, so Z --> A
-		str.split(//).map {|x| x == " " ? x = " " : x = (x.ord - num).chr}.join
-	end
+def caesar_cipher(num,str)
+	alphabet =* ("A".."z")
+	shift = alphabet.rotate(num)
+	#makes a hash with alphabet as key and shift as value
+	alpha_with_shift = alphabet.zip(shift).to_h
+	str.chars.map {|x| x == " " ? x = " " : x = alpha_with_shift[x]}.join
 end
-
