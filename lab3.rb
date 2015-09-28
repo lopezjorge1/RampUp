@@ -12,9 +12,10 @@ def crypt(choice, str)
 end
 
 def caesar_cipher(num,str)
-	alphabet =* ("A".."z")
-	shift = alphabet.rotate(num)
+	characters =* (32..126)
+	characters.map! {|x| x.chr}
+	shift = characters.rotate(num)
 	#makes a hash with alphabet as key and shift as value
-	alpha_with_shift = alphabet.zip(shift).to_h
-	str.chars.map {|x| x == " " ? x = " " : x = alpha_with_shift[x]}.join
+	char_with_shift = characters.zip(shift).to_h
+	str.chars.map {|x| x = char_with_shift[x]}.join
 end
