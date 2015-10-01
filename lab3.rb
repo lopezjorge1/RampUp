@@ -12,7 +12,7 @@ def crypt(choice, str)
 end
 
 def caesar_cipher(direction,num,str)
-	characters =* (32..126)
+	characters =* (32..126)#.map(&:chr)
 	characters.map! {|x| x.chr}
 	#shifts down (A -> Z) or up (Z -> A) based on what's given in parameter
 	shift = direction == "down" ? characters.rotate(num) : characters.rotate(-num)
@@ -20,3 +20,4 @@ def caesar_cipher(direction,num,str)
 	char_with_shift = characters.zip(shift).to_h
 	str.chars.map {|x| x = char_with_shift[x]}.join
 end
+
