@@ -1,6 +1,7 @@
 DECK = ([1,2,3,4,5,6,7,8,9] * 4) + ([10] * 16) 
 #I feel like this should be a class variable/instance variable 
 #because the values in the deck change everytime a card is dealt
+#add a feature where if the user types exit, they will exit the game
 class Blackjack
 	attr_accessor :player, :dealer, :player_card_combo, :player_card_count, :player_name 
 	attr_accessor :dealer_card_combo, :dealer_card_count
@@ -38,10 +39,10 @@ class Blackjack
 	end
 
 	def deal
-		self.player_card_combo = DECK.sample(2)
-		self.player_card_count = @player_card_combo.inject {|sum,x| sum += x}
-		self.dealer_card_combo = DECK.sample(2)
-		self.dealer_card_count = @dealer_card_combo.inject {|sum,x| sum += x}
+		@player_card_combo = DECK.sample(2)
+		@player_card_count = @player_card_combo.inject {|sum,x| sum += x}
+		@dealer_card_combo = DECK.sample(2)
+		@dealer_card_count = @dealer_card_combo.inject {|sum,x| sum += x}
 		puts "Your first two cards are: #{@player_card_combo.join(" , ")}"
 		puts "Total: #{@player_card_count}"
 		puts "One card from the dealer's hand is: #{@dealer_card_combo.sample}"
@@ -147,4 +148,3 @@ class Dealer
 		@bank_roll = bank_roll
 	end
 end
-game = Blackjack.new
