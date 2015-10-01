@@ -112,7 +112,7 @@ class Blackjack
 	end
 
 	def conitinue?
-		if @bank_roll != 0 && @bet_response == "yes"
+		if @bank_roll >= 0 && @bet_response == "yes"
 			puts "Would you like to keep playing?"
 			response = gets.chomp.downcase
 			case response
@@ -123,7 +123,7 @@ class Blackjack
 			else 
 				puts "Yes or No?"
 			end
-		elsif @bank_roll == 0 && @bet_response == "yes"
+		elsif @bank_roll <= 0 && @bet_response == "yes"
 			puts "Your bank roll has been depleted, you can't conitinue."
 		end
 	end
