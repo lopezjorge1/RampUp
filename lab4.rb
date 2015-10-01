@@ -66,7 +66,7 @@ class Blackjack
 		if @player_card_count == 21
 			puts "Winner!"
 			self.bank_roll += self.bet_amount
-			conitinue?
+			continue?
 		elsif @player_card_count < 21
 			next_move?
 		else
@@ -82,7 +82,7 @@ class Blackjack
 		if @dealer_card_count == 21
 			puts "The dealer got a 21. The dealer wins."
 			self.bank_roll -= self.bet_amount
-			conitinue?
+			continue?
 		elsif @dealer_card_count < 17
 			dealer_hit
 		else 
@@ -93,7 +93,7 @@ class Blackjack
 	def bust
 		puts "You lost! Your total was #{self.player_card_count}."
 		self.bank_roll -= self.bet_amount
-		conitinue?
+		continue?
 	end
 
 	def compare
@@ -102,19 +102,19 @@ class Blackjack
 		if @dealer_card_count > @player_card_count && @dealer_card_count <= 21
 			puts "The dealer beat you."
 			self.bank_roll -= self.bet_amount
-			conitinue?
+			continue?
 		elsif @dealer_card_count == @player_card_count && @dealer_card_count <= 21
 			puts "Draw."
-			conitinue?
+			continue?
 		else
 			puts "You win!"
 			self.bank_roll += self.bet_amount
-			conitinue?
+			continue?
 		end
 	end
 
-	def conitinue?
-		if @bank_roll >= 0 && @bet_response == "yes"
+	def continue?
+		if @bank_roll > 0 && @bet_response == "yes"
 			puts "Would you like to keep playing?"
 			response = gets.chomp.downcase
 			case response
@@ -126,7 +126,7 @@ class Blackjack
 				puts "Yes or No?"
 			end
 		elsif @bank_roll <= 0 && @bet_response == "yes"
-			puts "Your bank roll has been depleted, you can't conitinue."
+			puts "Your bank roll has been depleted, you can't continue."
 		end
 	end
 end
