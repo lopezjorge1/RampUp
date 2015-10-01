@@ -27,10 +27,10 @@ class Blackjack
 	def bet?
 		puts "Your bank roll is: $#{@bank_roll}"
 		puts "Would you like to place a bet?"
-		self.bet_response = gets.chomp.downcase
+		@bet_response = gets.chomp.downcase
 		if @bet_response == "yes"
 			puts "How much are you willing to bet?"
-			@bet_amount += gets.chomp.to_i
+			@bet_amount = gets.chomp.to_i
 			deal
 		else
 			deal
@@ -60,12 +60,12 @@ class Blackjack
 
 	def hit
 		@player_card_combo.push(DECK.sample)
-		self.player_card_count += @player_card_combo.last
+		@player_card_count += @player_card_combo.last
 		puts "Your next card is: #{@player_card_combo.last}"
 		puts "Total: #{@player_card_count}"
 		if @player_card_count == 21
 			puts "Winner!"
-			self.bank_roll += self.bet_amount
+			@bank_roll += @bet_amount
 			continue?
 		elsif @player_card_count < 21
 			next_move?
@@ -76,12 +76,12 @@ class Blackjack
 
 	def dealer_hit
 		@dealer_card_combo.push(DECK.sample)
-		self.dealer_card_count += @dealer_card_combo.last
+		@dealer_card_count += @dealer_card_combo.last
 		puts "The dealer's next card is: #{@dealer_card_combo.last}"
 		puts "The dealer's cards are: #{@dealer_card_combo.join(" , ")}"
 		if @dealer_card_count == 21
 			puts "The dealer got a 21. The dealer wins."
-			self.bank_roll -= self.bet_amount
+			@bank_roll -= @bet_amount
 			continue?
 		elsif @dealer_card_count < 17
 			dealer_hit
@@ -91,8 +91,8 @@ class Blackjack
 	end
 
 	def bust
-		puts "You lost! Your total was #{self.player_card_count}."
-		self.bank_roll -= self.bet_amount
+		puts "You lost! Your total was #{@player_card_count}."
+		@bank_roll -= @bet_amount
 		continue?
 	end
 
@@ -101,14 +101,14 @@ class Blackjack
 		puts "Yours is: #{@player_card_count}"
 		if @dealer_card_count > @player_card_count && @dealer_card_count <= 21
 			puts "The dealer beat you."
-			self.bank_roll -= self.bet_amount
+			@bank_roll -= @bet_amount
 			continue?
 		elsif @dealer_card_count == @player_card_count && @dealer_card_count <= 21
 			puts "Draw."
 			continue?
 		else
 			puts "You win!"
-			self.bank_roll += self.bet_amount
+			@bank_roll += @bet_amount
 			continue?
 		end
 	end
