@@ -2,7 +2,9 @@ DECK = ([1,2,3,4,5,6,7,8,9] * 4) + ([10] * 16)
 #I feel like this should be a class variable/instance variable 
 #because the values in the deck change everytime a card is dealt
 class Blackjack
-	attr_accessor :player, :dealer, :player_card_combo, :player_card_count, :dealer_card_combo, :dealer_card_count, :player, :player_name, :dealer, :bank_roll, :bet_amount, :bet_response
+	attr_accessor :player, :dealer, :player_card_combo, :player_card_count, :player_name 
+	attr_accessor :dealer_card_combo, :dealer_card_count
+	attr_accessor :bank_roll, :bet_amount, :bet_response
 	def initialize
 		@player = Player.new
 		@player_name = @player.name
