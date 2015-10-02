@@ -1,39 +1,53 @@
 DECK = ([1,2,3,4,5,6,7,8,9] * 4) + ([10] * 16) 
 #I feel like this should be a class variable/instance variable 
 #because the values in the deck change everytime a card is dealt
-#add a feature where if the user types exit, they will exit the game
 class Blackjack
 	attr_accessor :player, :dealer, :player_card_combo, :player_card_count, :player_name 
-	attr_accessor :dealer_card_combo, :dealer_card_count
-	attr_accessor :bank_roll, :bet_amount, :bet_response
+	attr_accessor :dealer_card_combo, :dealer_card_count, :dealer_bank_roll
+	attr_accessor :bank_roll, :bet_amount, :bank_roll_response
 	def initialize
 		@player = Player.new
 		@player_name = @player.name
-		@dealer = Dealer.new(25)
-		@bank_roll = @dealer.bank_roll 
+		@bank_roll = @player.bank_roll
+		@dealer = Dealer.new(rand(1000))
+		@dealer_bank_roll = @dealer.bank_roll 
 		@player_card_combo = [] 
 		@player_card_count = 0
 		@dealer_card_combo = []
 		@dealer_card_count = 0
 		@bet_amount = 0
-		@bet_response = ""
+		@bank_roll_response = ""
 		play
 	end
-
+	#should the player know how much money the dealer has?
 	def play
 		puts "Welcome to Blackjack #{@player_name}!"
-		bet?
+		bank_roll?
+	end
+
+	def bank_roll?
+		puts "Would you like to have a bank roll?"
+		@bank_roll_response = gets.chomp.downcase
+		if @bank_roll_response == "yes"
+			puts "How much do you want to start with?"
+			@bank_roll = gets.chomp.to_i
+			bet?
+		elsif @bank_roll_response == "no"
+			deal
+		else 
+			puts "Yes or No?"
+		end
 	end
 
 	def bet?
 		puts "Your bank roll is: $#{@bank_roll}"
 		puts "Would you like to place a bet?"
-		@bet_response = gets.chomp.downcase
-		if @bet_response == "yes"
+		response = gets.chomp.downcase
+		if response == "yes"
 			puts "How much are you willing to bet?"
 			@bet_amount = gets.chomp.to_i
 			deal
-		elsif @bet_response == "no"
+		elsif response == "no"
 			deal
 		else
 			puts "Yes or No?"
@@ -68,7 +82,8 @@ class Blackjack
 		puts "Total: #{@player_card_count}"
 		if @player_card_count == 21
 			puts "Winner!"
-			@bank_roll += @bet_amount
+			@bank_roll += @bet_amount 
+			@dealer_bank_roll -= @bet_amount
 			continue?
 		elsif @player_card_count < 21
 			next_move?
@@ -84,7 +99,8 @@ class Blackjack
 		puts "The dealer's cards are: #{@dealer_card_combo.join(" , ")}"
 		if @dealer_card_count == 21
 			puts "The dealer got a 21. The dealer wins."
-			@bank_roll -= @bet_amount
+			@bank_roll -= @bet_amount 
+			@dealer_bank_roll += @bet_amount
 			continue?
 		elsif @dealer_card_count < 17
 			dealer_hit
@@ -95,7 +111,8 @@ class Blackjack
 
 	def bust
 		puts "You lost! Your total was #{@player_card_count}."
-		@bank_roll -= @bet_amount
+		@bank_roll -= @bet_amount 
+		@dealer_bank_roll += @bet_amount 
 		continue?
 	end
 
@@ -104,42 +121,45 @@ class Blackjack
 		puts "Yours is: #{@player_card_count}"
 		if @dealer_card_count > @player_card_count && @dealer_card_count <= 21
 			puts "The dealer beat you."
-			@bank_roll -= @bet_amount
+			@bank_roll -= @bet_amount 
+			@dealer_bank_roll += @bet_amount
 			continue?
 		elsif @dealer_card_count == @player_card_count && @dealer_card_count <= 21
 			puts "Draw."
 			continue?
 		else
 			puts "You win!"
-			@bank_roll += @bet_amount
+			@bank_roll += @bet_amount 
+			@dealer_bank_roll -= @bet_amount 
 			continue?
 		end
 	end
 
 	def continue?
-		if @bank_roll > 0 && @bet_response == "yes"
+		if @bank_roll > 0 && @bank_roll_response == "yes"
 			puts "Would you like to keep playing?"
 			response = gets.chomp.downcase
 			case response
 			when "yes"
 				bet? 
 			when "no"
-				puts "So long!"
+				puts "So long! You ended with a bank roll of: $#{@bank_roll}"
 			else 
 				puts "Yes or No?"
 			end
-		elsif @bank_roll <= 0 && @bet_response == "yes"
+		elsif @bank_roll <= 0 && @bank_roll_response == "yes"
 			puts "Your bank roll has been depleted, you can't continue."
 		end
 	end
 end
 
 class Player
-	attr_accessor :name
+	attr_accessor :name, :bank_roll
 
 	def initialize
 		puts "What is your name?"
 		@name = gets.chomp.split.map {|x| x.capitalize}.join(" ")
+		@bank_roll = 0
 	end
 end
 
