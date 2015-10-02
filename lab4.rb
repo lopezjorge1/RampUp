@@ -33,8 +33,10 @@ class Blackjack
 			puts "How much are you willing to bet?"
 			@bet_amount = gets.chomp.to_i
 			deal
-		else
+		elsif @bet_response == "no"
 			deal
+		else
+			puts "Yes or No?"
 		end
 	end
 
