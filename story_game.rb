@@ -18,3 +18,10 @@ def fibonacci(num)
 	end
 	arr.inject{|sum,x| x % 2 == 0 ? sum += x : sum += 0}
 end
+
+
+a = [2,3,4]
+b = [2,3,4]
+
+a.map {|x| b.map {|y| y = y**x}}.flatten.uniq.count
+a.map {|x| b.map {|y| x = x**y}} #still have to understand the distinct difference between the two
