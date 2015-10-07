@@ -1,13 +1,19 @@
-DECK = ([1,2,3,4,5,6,7,8,9] * 4) + ([10] * 16) 
+#DECK = ([1,2,3,4,5,6,7,8,9] * 4) + ([10] * 16) 
 #I feel like this should be a class variable/instance variable 
 #because the values in the deck change everytime a card is dealt
+#try to separate certain behaviors in their respective classes
+#all of the instance variables made don't need the "@", that's why there's an attr_accessor
+#naming methods with a ? would make them a boolean, in practice
+#self is referencing the class itself (a lot of Ruby is implicit)
+#you explicitly use self when changes are being made to an object's attributes
+#class variables (@@) are higher level, like counting how many instances where created of the class 
 class Blackjack
-	attr_accessor :player, :dealer, :player_card_combo, :player_card_count, :player_name 
+	attr_accessor :player, :dealer, :player_card_combo, :player_card_count
 	attr_accessor :dealer_card_combo, :dealer_card_count, :dealer_bank_roll
-	attr_accessor :bank_roll, :bet_amount, :bank_roll_response
+	attr_accessor :bank_roll, :bet_amount, :bank_roll_response, :deck
 	def initialize
+		@deck = ([1,2,3,4,5,6,7,8,9] * 4) + ([10] * 16) 
 		@player = Player.new
-		@player_name = @player.name
 		@bank_roll = @player.bank_roll
 		@dealer = Dealer.new(rand(1000))
 		@dealer_bank_roll = @dealer.bank_roll 
@@ -21,7 +27,7 @@ class Blackjack
 	end
 	#should the player know how much money the dealer has?
 	def play
-		puts "Welcome to Blackjack #{@player_name}!"
+		puts "Welcome to Blackjack #{player.name}!"
 		bank_roll?
 	end
 
@@ -55,9 +61,9 @@ class Blackjack
 	end
 
 	def deal
-		@player_card_combo = DECK.sample(2)
+		@player_card_combo = @deck.sample(2)
 		@player_card_count = @player_card_combo.inject {|sum,x| sum += x}
-		@dealer_card_combo = DECK.sample(2)
+		@dealer_card_combo = @deck.sample(2)
 		@dealer_card_count = @dealer_card_combo.inject {|sum,x| sum += x}
 		puts "Your first two cards are: #{@player_card_combo.join(" , ")}"
 		puts "Total: #{@player_card_count}"
@@ -76,7 +82,7 @@ class Blackjack
 	end
 
 	def hit
-		@player_card_combo.push(DECK.sample)
+		@player_card_combo.push(@deck.sample)
 		@player_card_count += @player_card_combo.last
 		puts "Your next card is: #{@player_card_combo.last}"
 		puts "Total: #{@player_card_count}"
@@ -93,7 +99,7 @@ class Blackjack
 	end
 
 	def dealer_hit
-		@dealer_card_combo.push(DECK.sample)
+		@dealer_card_combo.push(@deck.sample)
 		@dealer_card_count += @dealer_card_combo.last
 		puts "The dealer's next card is: #{@dealer_card_combo.last}"
 		puts "The dealer's cards are: #{@dealer_card_combo.join(" , ")}"
@@ -170,3 +176,4 @@ class Dealer
 		@bank_roll = bank_roll
 	end
 end
+game = Blackjack.new
