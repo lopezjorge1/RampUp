@@ -4,7 +4,7 @@ class GuessWho
 
 	def initialize
 		@suspect = Suspect.new
-		@count = 0
+		@count = 3
 		@winning_response = ""
 		@guess_response = ""
 		show_suspects
@@ -25,7 +25,6 @@ class GuessWho
 		puts "What trait would you like to narrow down for your suspect?"
 		puts "Name | Gender | Skin | Hair | Eye"
 		guess_response = gets.chomp.downcase
-		self.count += 1
 		case guess_response
 		when "name"
 			puts "Who do you think the guilty suspect is?"
@@ -41,11 +40,15 @@ class GuessWho
 			suspect.guilty_suspect[:skin] != response ? suspect.suspect_list.delete_if {|x| x.has_value?(response)} : suspect.suspect_list.delete_if {|x| x[:skin] != response}
 		when "hair"
 			puts "Auburn, Black, Brown or Blonde?"
+			response = gets.chomp.capitalize
 			suspect.guilty_suspect[:hair] != response ? suspect.suspect_list.delete_if {|x| x.has_value?(response)} : suspect.suspect_list.delete_if {|x| x[:hair] != response}
 		when "eye"
 			puts "Brown, Blue or Green?"
+			response = gets.chomp.capitalize
 			suspect.guilty_suspect[:eye] != response ? suspect.suspect_list.delete_if {|x| x.has_value?(response)} : suspect.suspect_list.delete_if {|x| x[:eye] != response}
 		end
+		self.count -= 1
+		count_check unless guess_response == "name"
 	end
 
 	def winner
@@ -57,9 +60,10 @@ class GuessWho
 	end
 
 	def count_check
-		if count >= 3
+		if count <= 0
 			puts "Sorry, but you don't have anymore guesses! The guilty suspect was #{suspect.guilty_suspect[:name]}."
 		else
+			puts "You have #{count} tries left."
 			show_suspects
 		end
 	end
