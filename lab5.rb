@@ -1,12 +1,13 @@
 require "./lab5ex.rb"
 class GuessWho
-	attr_accessor :suspect, :count, :winning_response, :guess_response
+	attr_accessor :suspect, :count, :winning_response, :guess_response, :attribute_guess
 
 	def initialize
 		@suspect = Suspect.new
 		@count = 3
 		@winning_response = ""
 		@guess_response = ""
+		@attribute_guess = ""
 		show_suspects
 	end
 
@@ -32,21 +33,15 @@ class GuessWho
 			winner
 		when "gender"
 			puts "Boy or Girl?"
-			response = gets.chomp.capitalize
-			suspect.guilty_suspect[:gender] != response ? suspect.suspect_list.delete_if {|x| x.has_value?(response)} : suspect.suspect_list.delete_if {|x| x[:gender] != response}
 		when "skin"
 			puts "White or Black?"
-			response = gets.chomp.capitalize
-			suspect.guilty_suspect[:skin] != response ? suspect.suspect_list.delete_if {|x| x.has_value?(response)} : suspect.suspect_list.delete_if {|x| x[:skin] != response}
 		when "hair"
 			puts "Auburn, Black, Brown or Blonde?"
-			response = gets.chomp.capitalize
-			suspect.guilty_suspect[:hair] != response ? suspect.suspect_list.delete_if {|x| x.has_value?(response)} : suspect.suspect_list.delete_if {|x| x[:hair] != response}
 		when "eye"
 			puts "Brown, Blue or Green?"
-			response = gets.chomp.capitalize
-			suspect.guilty_suspect[:eye] != response ? suspect.suspect_list.delete_if {|x| x.has_value?(response)} : suspect.suspect_list.delete_if {|x| x[:eye] != response}
 		end
+		attribute_guess = gets.chomp.capitalize
+		suspect.guilty_suspect[guess_response.to_sym] != attribute_guess ? suspect.suspect_list.delete_if {|x| x.has_value?(attribute_guess)} : suspect.suspect_list.delete_if {|x| x[guess_response.to_sym] != attribute_guess}
 		self.count -= 1
 		count_check unless guess_response == "name"
 	end
@@ -68,4 +63,3 @@ class GuessWho
 		end
 	end
 end
-game = GuessWho.new

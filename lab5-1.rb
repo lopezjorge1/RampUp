@@ -92,4 +92,3 @@ class GuessWho
 		end
 	end
 end
-game = GuessWho.new
