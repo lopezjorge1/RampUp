@@ -69,7 +69,7 @@ class GuessWho
 			puts "Choose an attribute!"
 		end
 		attribute_guess = gets.chomp.capitalize
-		suspect_list.delete_if {|x| x.send(guess_response.to_sym) == attribute_guess}
+		suspect_list.delete_if {|x| x.send(guess_response) == attribute_guess}
 		self.count -= 1
 		count_checker unless guess_response == "name"
 	end
@@ -92,3 +92,4 @@ class GuessWho
 		end
 	end
 end
+game = GuessWho.new
