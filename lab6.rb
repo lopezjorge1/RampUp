@@ -33,7 +33,8 @@ class Leaberboard
 
 	def input_scores
 		puts "Input the scores."
-		self.score_input = gets.chomp.split.each_slice(2).to_h
+		input = gets.chomp.split.each_slice(2).to_h
+		self.score_input = input.each_with_object({}) {|(k,v),h| h[k] = v.to_i}
 		teams_used
 		game_comparison(score_input)
 		winner
