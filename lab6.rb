@@ -39,7 +39,7 @@ class Leaberboard
 		winner
 		start
 	end
-	#is sorting based on number, but if number is the same then it has to sort by letter
+
 	def rankings
 		puts "_ _ _ _ _ MLB RANKINGS _ _ _ _ _"
 		sorted_rankings = teams_wins.sort {|a,b| a.last == b.last ? a.first <=> b.first : b.last <=> a.last}
