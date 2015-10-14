@@ -23,7 +23,7 @@ class Tracker
 			teams_points[score_input.keys.last] += 3
 		when 0
 			teams_points[score_input.keys.first] += 1
-			teams_points[score_input.keys.first] += 1
+			teams_points[score_input.keys.last] += 1
 		end
 	end
 end
