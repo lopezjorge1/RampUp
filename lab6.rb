@@ -1,11 +1,11 @@
 require './lab6ex.rb'
 class Leaberboard
-	include Tracker
-	attr_accessor :teams_wins, :result, :score_input
+	attr_accessor :teams_points, :result, :score_input, :game_tracker
 
 	def initialize
-		@teams_wins = {}
-		@score_input = ""
+		@game_tracker = Tracker.new
+		@teams_points = {}
+		@score_input = {}
 		@result = 0
 		start
 	end
@@ -35,15 +35,15 @@ class Leaberboard
 		puts "Input the scores."
 		input = gets.chomp.split.each_slice(2).to_h
 		self.score_input = input.each_with_object({}) {|(k,v),h| h[k] = v.to_i}
-		teams_used
-		game_comparison(score_input)
-		winner
+		game_tracker.teams_used(score_input,teams_points)
+		game_tracker.game_comparison(score_input)
+		game_tracker.winner(teams_points,score_input)
 		start
 	end
 
 	def rankings
 		puts "_ _ _ _ _ MLB RANKINGS _ _ _ _ _"
-		sorted_rankings = teams_wins.sort {|a,b| a.last == b.last ? a.first <=> b.first : b.last <=> a.last}
+		sorted_rankings = teams_points.sort {|a,b| a.last == b.last ? a.first <=> b.first : b.last <=> a.last}
 		sorted_rankings.each {|k,v| puts "#{k.capitalize} : #{v}"}
 	end
 end
