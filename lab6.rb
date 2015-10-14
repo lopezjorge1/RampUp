@@ -1,12 +1,11 @@
 require './lab6ex.rb'
 class Leaberboard
-	attr_accessor :teams_points, :result, :score_input, :game_tracker
+	attr_accessor :teams_points, :score_input, :game_tracker
 
 	def initialize
 		@game_tracker = Tracker.new
 		@teams_points = {}
 		@score_input = {}
-		@result = 0
 		start
 	end
 
